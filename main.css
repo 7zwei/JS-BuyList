@@ -1,3 +1,178 @@
-h1 {
-    color: red;
+body {
+    background-color: lightgray;
+}
+.double_grid{
+    position: absolute;
+    height: 30%;
+    width: 90%;
+    background-color: lightgray;
+    top: 10%;
+    left: 5%;
+}
+.form_list{
+    position: absolute;
+    height: 75%;
+    width: 64%;
+    background-color: white;
+    top: 5%;
+    left: 2%;
+    border-radius: 1px;
+}
+.search_field{
+    position: absolute;
+    height: 18%;
+    left: 3%;
+    right: 3%;
+    top: 7%;
+    background-color: white;
+}
+.add_button{
+    position: absolute;
+    height: 95%;
+    width: 25%;
+    right: 0px;
+    color: white; 
+    background-color: steelblue;
+    border: none;
+    resize: none;
+    font-size: 5px;
+    font-weight: 900;
+    box-shadow: 0px 1px 0px royalblue;
+    border-radius: 1px;
+}
+input{
+    position: absolute;
+    height: 80%;
+    width: 74%;
+    left: 0;
+    right: 25%;
+    background-color: white;
+    font-size: 5px;
+    border: 0.05px solid lightgrey;
+    border-radius: 2px;
+    text-indent: 6px;
+}
+.item_1{
+    position: absolute;
+    height: 15px;
+    width: 100%;
+    background-color: white;
+    top: 22px;
+    border-top: 0.05px solid lightgrey;
+    
+}
+.item_2{
+    position: absolute;
+    height: 15px;
+    width: 100%;
+    background-color: white;
+    top: 38px;
+    border-top: 0.05px solid lightgrey;
+}
+.item_3{
+    position: absolute;
+    height: 15px;
+    width: 100%;
+    background-color: white;
+    top: 54px;
+    border-top: 0.05px solid lightgrey;
+}
+.item_name{
+    top: 25%;
+    position: absolute;
+    font-size: 6px;
+    text-indent: 9px;
+}
+.amount{
+    position: absolute;
+    height: 15px;
+    background-color: white;
+    width: 28%;
+    left: 33%;
+}
+.buy{
+    position: absolute;
+    height: 15px;
+    background-color: white;
+    width: 25%;
+    left: 72%;
+}
+.minus_button{
+    position: absolute;
+    background-color: lightpink;
+    height: 12px;
+    width: 12px;
+    text-align: center;
+    left: 10%;
+    top: 10%;
+    border-radius: 6px;
+    border: none;
+    text-indent: -1px;
+    font-size: 7px;
+    color: white;
+}
+.number{
+    background-color: lavender;
+    position: absolute;
+    height: 8px;
+    width: 10px;
+    text-align: center;
+    left: 40%;
+    top: 18%;
+    font-size: 5px;
+    padding-top: 2px;
+    border-radius: 4px;
+}
+.plus_button{
+    position: absolute;
+    background-color: mediumseagreen;
+    height: 12px;
+    width: 12px;
+    text-align: center;
+    right: 10%;
+    top: 10%;
+    border-radius: 6px;
+    border: none;
+    text-indent: -2px;
+    font-size: 7px;
+    color: white;
+}
+.buy_button{
+    position: absolute;
+    height: 11px;
+    width: 30px;
+    text-align: center;
+    left: 0%;
+    top: 10%;
+    color: black;
+    background-color: lavender;
+    font-size: 4px;
+    border-radius: 2px;
+    text-indent: -2px;
+    box-shadow: 0px 1px 0px lightgray;
+    border: none;
+}
+.remove_item_button{
+    position: absolute;
+    height: 11px;
+    width: 10px;
+    text-align: center;
+    right: 0%;
+    top: 10%;
+    color: white;
+    background-color: indianred;
+    font-size: 4px;
+    border-radius: 2px;
+    text-indent: -2px;
+    box-shadow: 0px 1px 0px #B23939;
+    border: none;
+}
+.info_column{
+    position: absolute;
+    height: 85%;
+    width: 28%;
+    background-color: white;
+    top: 5%;
+    right: 2%;
+    border-radius: 1px;
 }
