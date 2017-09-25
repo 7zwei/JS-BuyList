@@ -4,19 +4,20 @@ body {
 .double_grid{
     position: absolute;
     height: 30%;
-    width: 90%;
+    width: 62%;
     background-color: lightgray;
-    top: 10%;
-    left: 5%;
+    top: 9%;
+    left: 20%;
 }
 .form_list{
     position: absolute;
     height: 75%;
-    width: 64%;
+    width: 68%;
     background-color: white;
     top: 5%;
     left: 2%;
-    border-radius: 1px;
+    box-shadow: 2px 2px 2px #C0C0C0;
+    border-radius: 3px;
 }
 .search_field{
     position: absolute;
@@ -28,71 +29,76 @@ body {
 }
 .add_button{
     position: absolute;
-    height: 95%;
-    width: 25%;
+    height: 93%;
+    width: 15%;
     right: 0px;
     color: white; 
     background-color: steelblue;
     border: none;
     resize: none;
-    font-size: 5px;
+    font-size: 14px;
     font-weight: 900;
     box-shadow: 0px 1px 0px royalblue;
     border-radius: 1px;
+    font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
 input{
     position: absolute;
     height: 80%;
-    width: 74%;
+    width: 85%;
     left: 0;
     right: 25%;
     background-color: white;
-    font-size: 5px;
+    font-size: 14px;
     border: 0.05px solid lightgrey;
-    border-radius: 2px;
+    border-radius: 1.5px;
     text-indent: 6px;
+    font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
 .item_1{
     position: absolute;
-    height: 15px;
+    height: 23%;
     width: 100%;
     background-color: white;
-    top: 22px;
+    top: 30%;
     border-top: 0.05px solid lightgrey;
+    font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
     
 }
 .item_2{
     position: absolute;
-    height: 15px;
+    height: 23%;
     width: 100%;
     background-color: white;
-    top: 38px;
+    top: 53%;
     border-top: 0.05px solid lightgrey;
+    font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
 .item_3{
     position: absolute;
-    height: 15px;
+    height: 23%;
     width: 100%;
     background-color: white;
-    top: 54px;
+    top: 76%;
     border-top: 0.05px solid lightgrey;
+    font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
 .item_name{
-    top: 25%;
+    top: 30%;
     position: absolute;
-    font-size: 6px;
-    text-indent: 9px;
+    font-size: 16px;
+    text-indent: 3%;
 }
 .amount{
     position: absolute;
-    height: 15px;
+    height: 100%;
     background-color: white;
     width: 28%;
     left: 33%;
 }
 .buy{
     position: absolute;
-    height: 15px;
+    height: 100%;
     background-color: white;
     width: 25%;
     left: 72%;
@@ -100,53 +106,54 @@ input{
 .minus_button{
     position: absolute;
     background-color: lightpink;
-    height: 12px;
-    width: 12px;
+    height: 60%;
+    width: 15%;
     text-align: center;
-    left: 10%;
+    left: 15%;
     top: 10%;
-    border-radius: 6px;
+    border-radius: 14px;
     border: none;
     text-indent: -1px;
-    font-size: 7px;
+    font-size: 18px;
     color: white;
 }
 .number{
     background-color: lavender;
     position: absolute;
-    height: 8px;
-    width: 10px;
+    height: 50%;
+    width: 15%;
     text-align: center;
-    left: 40%;
-    top: 18%;
-    font-size: 5px;
-    padding-top: 2px;
+    left: 36%;
+    top: 15%;
+    font-size: 15px;
+    padding-top: 1%;
     border-radius: 4px;
+    font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
 .plus_button{
     position: absolute;
     background-color: mediumseagreen;
-    height: 12px;
-    width: 12px;
+    height: 60%;
+    width: 15%;
     text-align: center;
-    right: 10%;
+    right: 28%;
     top: 10%;
-    border-radius: 6px;
+    border-radius: 14px;
     border: none;
-    text-indent: -2px;
-    font-size: 7px;
+    text-indent: -1px;
+    font-size: 18px;
     color: white;
 }
 .buy_button{
     position: absolute;
-    height: 11px;
-    width: 30px;
+    height: 60%;
+    width: 55%;
     text-align: center;
-    left: 0%;
+    left: 25%;
     top: 10%;
     color: black;
     background-color: lavender;
-    font-size: 4px;
+    font-size: 13px;
     border-radius: 2px;
     text-indent: -2px;
     box-shadow: 0px 1px 0px lightgray;
@@ -154,25 +161,115 @@ input{
 }
 .remove_item_button{
     position: absolute;
-    height: 11px;
-    width: 10px;
+    height: 60%;
+    width: 18%;
     text-align: center;
     right: 0%;
     top: 10%;
     color: white;
     background-color: indianred;
-    font-size: 4px;
-    border-radius: 2px;
-    text-indent: -2px;
+    font-size: 14px;
+    border-radius: 6px;
+    text-indent: -1px;
     box-shadow: 0px 1px 0px #B23939;
     border: none;
 }
 .info_column{
     position: absolute;
-    height: 85%;
-    width: 28%;
+    height: 70%;
+    width: 25%;
     background-color: white;
     top: 5%;
     right: 2%;
-    border-radius: 1px;
+    box-shadow: 2px 2px 2px #C0C0C0;
+    border-radius: 1.5%;
+}
+.label_remaining{
+    position: absolute;
+    height: 17%;
+    width: 100%;
+    background-color: white;
+    font-size: 19px;
+    padding-top: 6%;
+    text-indent: 6%;
+    font-weight: 600;
+    border-radius: 5%;
+    font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+.items_remaining{
+    position: absolute;
+    height: 30%;
+    top: 26%;
+    width: 100%;
+    background-color: white;
+    font-size: 20px;
+    border-top: 0.05px solid lightgrey;
+    font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+.remaining_item_1{
+    position: absolute;
+    height: 50%;
+    top: 26%;
+    left: 5%;
+    width: 30%;
+    border-radius: 6%;
+    background-color: lavender;
+    box-shadow: 2px 2px 1px #C0C0C0;
+}
+.remaining_item_2{
+    position: absolute;
+    height: 50%;
+    top: 26%;
+    left: 37%;
+    width: 28%;
+    border-radius: 10%;
+    background-color: lavender;
+    box-shadow: 2px 2px 1px #C0C0C0;
+}
+.remaining_item_3{
+    position: absolute;
+    height: 50%;
+    top: 26%;
+    left: 67%;
+    width: 20%;
+    border-radius: 10%;
+    background-color: lavender;
+    box-shadow: 2px 2px 1px #C0C0C0;
+}
+.remaining_item_name{
+    font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    position: absolute;
+    font-size: 11px;
+    padding-top: 10px;
+    text-indent: 6%;
+}
+.remaining_item_number{
+    font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    position: absolute;
+    height: 55%;
+    width: 25px;
+    top: 10%;
+    font-size: 11px;
+    padding-top: 7px;
+    text-indent: 6%;
+    right: 6%;
+    font-weight: 600;
+    text-indent: 9px;
+    background-color: coral;
+    color: white;
+    border-radius: 50%;
+}
+.label_bought{
+    position: absolute;
+    height: 16%;
+    width: 100%;
+    top: 57%;
+    background-color: white;
+    border-top: 0.05px solid lightgrey;
+    border-bottom: 0.05px solid lightgrey;
+    font-size: 19px;
+    padding-top: 6%;
+    text-indent: 6%;
+    font-weight: 600;
+    font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }

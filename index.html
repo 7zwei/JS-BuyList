@@ -11,19 +11,62 @@
         <div class="form_list">
             <div class="search_field">
                 <input type="text" name="product_name" placeholder="Назва товару">
-                <button type="button">Додати</button>
+                <button type="button" class="add_button">Додати</button>
             </div>
             <div class="item_1">
-                <div class="item_name">Помідори</div>
+                <div class="item_name" contenteditable="true">Помідори</div>
+                <div class="amount">
+                    <button type="button" class="minus_button">-</button>
+                    <div class="number">1</div>
+                    <button type="button" class="plus_button">+</button>
+                </div>
+                <div class="buy">
+                    <button type="button" class="buy_button">Куплено</button>
+                    <button type="button" class="remove_item_button">✕</button>
+                </div>
             </div>
             <div class="item_2">
-                <div class="item_name">Печиво</div>
+                <div class="item_name" contenteditable="true">Печиво</div>
+                <div class="amount">
+                    <button type="button" class="minus_button">-</button>
+                    <div class="number">1</div>
+                    <button type="button" class="plus_button">+</button>
+                </div>
+                <div class="buy">
+                    <button type="button" class="buy_button">Куплено</button>
+                    <button type="button" class="remove_item_button">✕</button>
+                </div>
             </div>
             <div class="item_3">
-                <div class="item_name">Сир</div>
+                <div class="item_name" contenteditable="true">Сир</div>
+                <div class="amount">
+                    <button type="button" class="minus_button">-</button>
+                    <div class="number">1</div>
+                    <button type="button" class="plus_button">+</button>
+                </div>
+                <div class="buy">
+                    <button type="button" class="buy_button">Куплено</button>
+                    <button type="button" class="remove_item_button">✕</button>
+                </div>
             </div>
         </div>
         <div class="info_column">
+            <div class="label_remaining">Залишилося</div>
+            <div class="items_remaining">
+                <div class="remaining_item_1">
+                    <span class="remaining_item_name">Помiдори</span>
+                    <span class="remaining_item_number">1</span>
+                </div>
+                <div class="remaining_item_2">
+                    <span class="remaining_item_name">Печиво</span>
+                    <span class="remaining_item_number">1</span>
+                </div>
+                <div class="remaining_item_3">
+                    <span class="remaining_item_name">Сир</span>
+                    <span class="remaining_item_number">1</span>
+                </div>
+            </div>
+            <div class="label_bought">Куплено</div>
         </div>
     </div>
 </body>
