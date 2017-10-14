@@ -1,74 +1,335 @@
 <!DOCTYPE html>
 <html>
+<head lang="uk">
+    <meta charset="UTF-8">
+    <title>Vadym Chumasov's Buylist</title>
 
-<head>
-    <title>7zwei_Practice_01</title>
-    <link rel="stylesheet" type="text/css" href="main.css">
+
+    <link rel="stylesheet" type="text/css" href="main1.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
-
 <body>
-    <div class="double_grid">
-        <div class="form_list">
-            <div class="search_field">
-                <input type="text" name="product_name" placeholder="Назва товару">
-                <button type="button" class="add_button">Додати</button>
-            </div>
-            <div class="item_1">
-                <div class="item_name" contenteditable="true">Помідори</div>
-                <div class="amount">
-                    <button type="button" class="minus_button">-</button>
-                    <div class="number">1</div>
-                    <button type="button" class="plus_button">+</button>
-                </div>
-                <div class="buy">
-                    <button type="button" class="buy_button">Куплено</button>
-                    <button type="button" class="remove_item_button">✕</button>
-                </div>
-            </div>
-            <div class="item_2">
-                <div class="item_name" contenteditable="true">Печиво</div>
-                <div class="amount">
-                    <button type="button" class="minus_button">-</button>
-                    <div class="number">1</div>
-                    <button type="button" class="plus_button">+</button>
-                </div>
-                <div class="buy">
-                    <button type="button" class="buy_button">Куплено</button>
-                    <button type="button" class="remove_item_button">✕</button>
-                </div>
-            </div>
-            <div class="item_3">
-                <div class="item_name" contenteditable="true">Сир</div>
-                <div class="amount">
-                    <button type="button" class="minus_button">-</button>
-                    <div class="number">1</div>
-                    <button type="button" class="plus_button">+</button>
-                </div>
-                <div class="buy">
-                    <button type="button" class="buy_button">Куплено</button>
-                    <button type="button" class="remove_item_button">✕</button>
-                </div>
-            </div>
-        </div>
-        <div class="info_column">
-            <div class="label_remaining">Залишилося</div>
-            <div class="items_remaining">
-                <div class="remaining_item_1">
-                    <span class="remaining_item_name">Помiдори</span>
-                    <span class="remaining_item_number">1</span>
-                </div>
-                <div class="remaining_item_2">
-                    <span class="remaining_item_name">Печиво</span>
-                    <span class="remaining_item_number">1</span>
-                </div>
-                <div class="remaining_item_3">
-                    <span class="remaining_item_name">Сир</span>
-                    <span class="remaining_item_number">1</span>
-                </div>
-            </div>
-            <div class="label_bought">Куплено</div>
-        </div>
-    </div>
-</body>
+	<script>
+		
 
+		
+
+		function addItem() {
+			var nameField = $('.name-field')
+			var name = nameField.val()
+
+			if(!name) return; 
+
+			nameField.val('')
+			nameField[0].focus()
+
+			var newItem = generateNewItem(name);
+			newItem.css({
+				height: 0,
+				padding: "0 15px"
+			})
+
+			getItemList().append(newItem)
+
+			$(newItem).animate({
+				height: "28px", 
+				"padding": "15px"
+			}, 500)
+
+			$('.list.to-buy').append(generateNewBadge(name))
+		}
+
+		function deleteItem(itemNode) {
+			console.log(getRelatedBadge(itemNode))
+			getRelatedBadge(itemNode).remove()
+
+			$(itemNode).animate({
+				height: "toggle", 
+				"padding": "0 15px"
+			}, 500, function() {
+				itemNode.remove();	
+			})
+		}
+
+		function toggleBuyItem(itemNode) {
+			itemNode.animate({
+				opacity: 0
+			}, 400, function() {
+				
+				var btnBuy = itemNode.find('.btn-buy')
+				var minusPlus = itemNode.find('.minus,.plus')
+				var btnRemove = itemNode.find('.btn-remove')
+				var badge = getRelatedBadge(itemNode);
+				console.log(badge)
+
+				if(btnBuy.html() == 'Куплено') {
+					btnBuy.html('Не куплено')
+					btnBuy.attr('data-tooltip', 'Не купляти')
+					minusPlus.css({
+						opacity: 0,
+						'pointer-events': 'none'
+					})
+					btnRemove.hide();
+				
+
+					badge.remove();
+					var boughtIndex = getRelatedBoughtBadgeIndex(itemNode)
+					if(!boughtIndex) {
+						$('.list.bought').prepend(badge)
+					} else {
+						console.log(boughtIndex, $('.list.bought > .list-item'))
+						$($('.list.bought > .list-item')[boughtIndex-1]).after(badge)
+					}
+				} else {
+					btnBuy.html('Куплено')	
+					btnBuy.attr('data-tooltip', 'Купити')
+					minusPlus.attr('style', '')
+					btnRemove.show()
+
+					badge.remove();
+					var toBuyIndex = getRelatedToBuyBadgeIndex(itemNode)
+					console.log(toBuyIndex)
+					$($('.list.to-buy > .list-item')[toBuyIndex-1]).after(badge)
+				}
+
+				btnBuy.blur()
+
+				itemNode.animate({
+					opacity: 1
+				}, 400)
+			})	
+		}
+
+		function toggleEditNameMode(itemNode, editMode) {
+			if(itemIsBought(itemNode))
+				return;
+
+			var name = itemNode.find('.name')
+			var newNameInput = itemNode.find('.new-name')
+
+			if(!editMode && !newNameInput.val())
+				return;
+
+			name.toggle(!editMode)
+			newNameInput.toggle(editMode)
+
+			if(editMode)
+				newNameInput[0].focus()
+
+			newNameInput.val(name.html())
+		}
+
+		function updateItemName(itemNode) {
+			var name = itemNode.find('.name')
+			var newNameInput = itemNode.find('.new-name')
+			name.html(newNameInput.val())
+			getRelatedBadge(itemNode).find('.item-name').html(name.html())
+		}	
+
+		function changeItemCount(itemNode, delta) {
+			var countBlock = itemNode.find('.btns-center')
+			var minus = countBlock.find('.minus')
+			var count = countBlock.find('.count')
+			var currentCount = parseInt(count.html())
+			var newCount = currentCount + delta;
+
+			countBlock.animate({
+				opacity: 0
+			}, 200, function() {
+				count.html(newCount);
+				minus.toggleClass('disabled', newCount == 1);
+				countBlock.animate({
+					opacity: 1
+				})
+
+				getRelatedBadge(itemNode).find('.item-count').html(newCount)
+			})
+		}
+
+
+
+		function generateNewItem(name) {
+			var newItem = $('#list-item-example').clone();
+			newItem.find('.name').html(name);
+			newItem.show();
+			return newItem;
+		}
+
+		function generateNewBadge(name) {
+			var newBadge = $('#badge-example').clone()
+			newBadge.find('.item-name').html(name);
+			newBadge.show();
+			return newBadge;
+		}
+
+		function getItemList() {
+			return $('.main-block > .list')
+		}
+
+		function getRelatedToBuyBadgeIndex(itemNode) {
+			var toBuyIndex = $('.btn-remove:visible').closest('.list-item').index(itemNode);
+			return console.log('to-buy-index', toBuyIndex + 1), toBuyIndex + 1;
+		}
+
+		function getRelatedBoughtBadgeIndex(itemNode) {
+			var res = $('.btn-remove:not(:visible)[style]').closest('.list-item').index(itemNode);
+			return console.log('bought-index', res), res
+		}
+
+		function getRelatedBadge(itemNode) {
+			var toBuyIndex = getRelatedToBuyBadgeIndex(itemNode)
+
+			if(toBuyIndex != 0) {
+				return $($(".list.to-buy > .list-item")[toBuyIndex])
+			}
+			
+			var boughtIndex = getRelatedBoughtBadgeIndex(itemNode)
+
+			return $($(".list.bought > .list-item")[boughtIndex])
+		}
+
+		function itemIsBought(itemNode) {
+			return itemNode.find('.btn-remove:visible').length == 0;
+		}
+
+
+		$(function() {
+			$('#btn-add-item').click(addItem)
+			$('.name-field').keypress(function(e) { 
+				if(e.keyCode == 13) {
+					addItem();
+				} 
+			})
+			$('.main-block').on('click', '.btn-remove', function() {
+				deleteItem($(this).closest('.list-item'))	
+			})
+			$('.main-block').on('click', '.btn-buy', function() {
+				toggleBuyItem($(this).closest('.list-item'))	
+			})
+			$('.main-block').on('click', '.name', function() {
+				toggleEditNameMode($(this).closest('.list-item'), true)	
+			})
+			$('.main-block').on('input', '.new-name', function() {
+				updateItemName($(this).closest('.list-item'))
+			})
+			$('.main-block').on('blur', '.new-name', function() {
+				toggleEditNameMode($(this).closest('.list-item'), false)	
+			})
+			$('.main-block').on('click', '.plus,.minus', function() {
+				changeItemCount($(this).closest('.list-item'), -1 + $(this).hasClass('plus')*2)
+			})
+
+		})
+	</script>
+	<div class="container">
+		<div class="block main-block">
+			<div class="search-form">
+				<input type="text" class="name-field" placeholder="Назва товару">
+				<button id="btn-add-item" type="button" data-tooltip="Додати товар">Додати</button>
+			</div>
+		
+			<div class="list">
+				<div id="list-item-example" class="list-item" style="display:none">
+					<div class="name">Помідори</div>
+					<input type="text" class="new-name">
+					<div class="btns-center">
+						<div class="round-btn minus disabled" data-tooltip="Зменшити кількість">-</div>
+						<div class="count">1</div>
+						<div class="round-btn plus" data-tooltip="Збільшити кількість">+</div>
+					</div>
+					<div class="btns-right">
+						<button class="btn-buy" data-tooltip="Купити">Куплено</button>
+						<button class="btn-remove" data-tooltip="Видалити">x</button>
+					</div>
+				</div>
+
+				<div class="list-item">
+					<div class="name">Помідори</div>
+					<input type="text" class="new-name">
+					<div class="btns-center">
+						<div class="round-btn minus disabled" data-tooltip="Зменшити кількість">-</div>
+						<div class="count">1</div>
+						<div class="round-btn plus" data-tooltip="Збільшити кількість">+</div>
+					</div>
+					<div class="btns-right">
+						<button class="btn-buy" data-tooltip="Купити">Куплено</button>
+						<button class="btn-remove" data-tooltip="Видалити">x</button>
+					</div>
+				</div>
+				<div class="list-item">
+					<div class="name">Печиво</div>
+					<input type="text" class="new-name">
+					<div class="btns-center">
+						<div class="round-btn minus disabled" data-tooltip="Зменшити кількість">-</div>
+						<div class="count">1</div>
+						<div class="round-btn plus" data-tooltip="Збільшити кількість">+</div>
+					</div>
+					<div class="btns-right">
+						<button class="btn-buy" data-tooltip="Купити">Куплено</button>
+						<button class="btn-remove" data-tooltip="Видалити">x</button>
+					</div>
+				</div>
+				<div class="list-item">
+					<div class="name">Сир</div>
+					<input type="text" class="new-name">
+					<div class="btns-center">
+						<div class="round-btn minus disabled" data-tooltip="Зменшити кількість">-</div>
+						<div class="count">1</div>
+						<div class="round-btn plus" data-tooltip="Збільшити кількість">+</div>
+					</div>
+					<div class="btns-right">
+						<button class="btn-buy" data-tooltip="Купити">Куплено</button>
+						<button class="btn-remove" data-tooltip="Видалити">x</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="block summary">
+			<h3>Залишилося</h3>
+			<div class="list to-buy">
+				<div id="badge-example" class="list-item" style="display: none">
+					<div class="item-name">
+						Помідори
+					</div>
+					<div class="item-count">
+						1
+					</div>
+				</div>	
+
+				<div class="list-item">
+					<div class="item-name">
+						Помідори
+					</div>
+					<div class="item-count">
+						1
+					</div>
+				</div>	
+				<div class="list-item">
+					<div class="item-name">
+						Печиво
+					</div>
+					<div class="item-count">
+						1
+					</div>
+				</div>
+				<div class="list-item">
+					<div class="item-name">
+						Сир
+					</div>
+					<div class="item-count">
+						1
+					</div>
+				</div>
+			</div>
+			<h3>Куплено</h3>
+			<div class="list bought">	
+			</div>	
+		</div>
+	</div>
+        <div class="badge">
+            <h2>Buy List</h3>
+            <h4>Created by:</h4>
+            <h3>Vadym Chumasov</h3>
+        </div>
+</body>
 </html>
